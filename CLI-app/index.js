@@ -1,14 +1,12 @@
-import yargs from "yargs";
-import { hideBin } from "yargs/helpers";
+const argv = require("yargs").argv;
 
-import {
+const {
   listContacts,
   getContactById,
   removeContact,
   addContact,
-} from "./contacts.js";
+} = require("./contacts");
 
-// TODO: рефакторить
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
@@ -36,7 +34,4 @@ async function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-const argvArr = hideBin(process.argv);
-const args = yargs(argvArr).argv;
-
-await invokeAction(args);
+invokeAction(argv);
